@@ -38,6 +38,7 @@ For more details, check the `lib/models.js` file.
 3. Run the project in another TTY 2.
 
     ```shell
+    pnpm i
     pnpm run dev
     ```
 
