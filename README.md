@@ -5,26 +5,51 @@ This is the repo for the demo in *Towards Cognitive Agent: Beyond Q&A: Build Eve
 
 ## Quick Start
 
-*This Demo supports `HTTPS_PROXY`, if you have trouble accessing the LLM provider, please set the `HTTPS_PROXY` environment variable. For more details, check `lib/proxiedFetch.js`.*
-
 1. Set the API KEY of your AI model.
 
     ```shell
-    export OPENAI_API_KEY=your-api-key
-    export MY_MODEL=openai:gpt-3.5-turbo
+    export <PROVIDER>_API_KEY=your-api-key
+    export MY_MODEL=<PROVIDER>:<MODEL NAME>
     ```
 
-Supported providers:
- - [x] Groq
- - [x] Cohere
- - [x] xAI
- - [x] Mistral
- - [x] Fireworks
- - [x] OpenAI
+    Supported providers:
+    - [x] Groq
+        ```shell
+        export GROQ_API_KEY=your-api-key
+        export MY_MODEL=groq:llama3-70b-8192
+        ```
+    - [x] Cohere
+        ```shell
+        export COHERE_API_KEY=your-api-key
+        export MY_MODEL=cohere:command-r
+        ```
+    - [x] xAI
+        ```shell
+        export XAI_API_KEY=your-api-key
+        export MY_MODEL=xai:grok-beta
+        ```
+    - [x] Mistral
+        ```shell
+        export MISTRAL_API_KEY=your-api-key
+        export MY_MODEL=mistral:mistral-large-latest
+        ```
+    - [x] Fireworks
+        ```shell
+        export FIREWORKS_API_KEY=your-api-key
+        export MY_MODEL=fireworks:accounts/fireworks/models/llama-v3p1-405b-instruct
+        ```
+    - [x] OpenAI
+        ```shell
+        export OPENAI_API_KEY=your-api-key
+        export MY_MODEL=openai:gpt-4o
+        ```
 
-Use `MY_MODEL=provider:model` to select the AI model. 
-For example, to select `llama3-70b-8192` in Groq, use `MY_MODEL=groq:llama3-70b-8192`.
-For more details, check the `lib/models.js` file.
+    Use `MY_MODEL=provider:model` to select the AI model. 
+    For example, to select `llama3-70b-8192` in Groq, use `MY_MODEL=groq:llama3-70b-8192`.
+    For more details, check the [lib/models.js](./lib/models.js) file.
+
+    *This Demo supports `HTTPS_PROXY`, if you have trouble accessing the LLM provider, please set the `HTTPS_PROXY` environment variable. For more details, check [lib/proxiedFetch.js](./lib/proxidFetch.js).*
+
 
 2. Start risingwave in one TTY 1.
 
