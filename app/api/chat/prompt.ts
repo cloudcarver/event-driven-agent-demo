@@ -1,34 +1,3 @@
-const registerBurstExample = `
-  CREATE MATERIALIZED VIEW event_trigger_user_register_burst AS
-    WITH daily_cnt AS (
-      SELECT d, COUNT(id)
-        FROM (SELECT id, DATE_TRUNC('day', created_at) AS d FROM users)
-      GROUP BY d
-    ),
-    daily_avg AS (
-      SELECT AVG(count) FROM daily_cnt
-    ),
-    daily_stddev AS (
-      SELECT STDDEV_SAMP (count) FROM daily_cnt
-    ),
-    register_events AS (
-      SELECT
-        'Send a message to user and tell him there is a user register burst' AS prompt,
-        timestamp
-      FROM (
-        SELECT COUNT(id) AS count FROM users WHERE created_at > NOW() - INTERVAL '1 day'
-      ) AS t
-      WHERE t.count > (SELECT * FROM daily_avg) + 3 * (SELECT * FROM daily_stddev)
-    )
-    SELECT
-      'Send a message to user and tell him there is a user register burst' AS prompt,
-      timestamp
-    FROM (
-      SELECT COUNT(id) AS count FROM users WHERE created_at > NOW() - INTERVAL '1 day'
-    ) AS t
-    WHERE t.count > (SELECT * FROM daily_avg) + 3 * (SELECT * FROM daily_stddev)
-`
-
 const eventTriggersTableName = "sys_event_triggers"
 
 const systemPrompt = `You are a helpful database assistant. Under the hood you have access to the RisingWave database and can help users with their queries. 
