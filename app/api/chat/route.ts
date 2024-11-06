@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     messages,
     tools: {
       executeRisingWaveSQL: {
-        description: 'Execute SQL statement on the RisingWave database, make sure the SQL statement is complete and correct',
+        description: 'Execute SQL statement on the RisingWave database, make sure the SQL statement is complete and correct, and there is only one SQL statement',
         parameters: z.object({ sql: z.string() }),
         execute: async ({ sql }) => {
           let res = await runSQL(sql);
