@@ -91,14 +91,17 @@ export default function EventHandler() {
 
   return (
     <div className={border + " p-2"}>
-      <div>Event Handler</div>
+      <div className="font-semibold mb-2">Event Handler</div>
       {
         handlingPrompt
           ? <div>
-            <h1>Handling Prompt</h1>
-            <p>{handlingPrompt}</p>
+            <h1 className="text-blue-600 font-medium">Handling Prompt</h1>
+            <p className="mt-1 text-gray-700">{handlingPrompt}</p>
           </div>
-          : <h1>Waiting for event, last poll: {lastRefreshAt?.toTimeString()}</h1>
+          : <div className="flex items-center gap-2 text-gray-600">
+              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"/>
+              <span>Last poll: {lastRefreshAt?.toLocaleTimeString()}</span>
+            </div>
       }
     </div>
   );

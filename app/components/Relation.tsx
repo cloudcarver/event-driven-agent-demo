@@ -80,17 +80,15 @@ export default function Relation() {
 
   return <div>
     <div className="flex flex-row gap-2 items-center">
-      <select className={border + " h-8"} value={relation} onClick={() => refreshRelations()} onChange={(e) => setRelation(e.currentTarget.value)}>
+      <select className={border + " h-8 px-2 focus:ring-2 focus:ring-blue-200 focus:outline-none bg-white"} value={relation} onClick={() => refreshRelations()} onChange={(e) => setRelation(e.currentTarget.value)}>
         {
           availableRelations.map((relation, idx) => {
             return <option key={idx} value={relation}>{relation}</option>
           })
         }
-      </select>
-
-      {relation && <>
-        <span>OrderBy</span>
-        <select className={border + " h-8"} value={orderBy} onChange={(e) => {
+      </select>        {relation && <>
+          <span className="text-gray-600">OrderBy</span>
+          <select className={border + " h-8 px-2 focus:ring-2 focus:ring-blue-200 focus:outline-none bg-white"} value={orderBy} onChange={(e) => {
           setOrderBy(e.currentTarget.value)
         }}>
           {
@@ -104,21 +102,21 @@ export default function Relation() {
     {
       info.error && <div className="text-red-500">{info.error}</div>
     }
-    <table className="my-2">
+    <table className="my-2 w-full border-collapse overflow-hidden">
       <thead>
-        <tr>
+        <tr className="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 border-b border-gray-300">
           {
             info.fields && info.fields.map((field, idx) => {
-              return <th key={idx} className={border + " p-2"}>{field.name}</th>
+              return <th key={idx} className="p-2 font-semibold text-gray-700">{field.name}</th>
             })
           }
         </tr>
         {
           info.rows && info.rows.map((row, r) => {
-            return <tr key={"r-" + r}>
+            return <tr key={"r-" + r} className="hover:bg-gray-50 transition-colors">
               {
                 info.fields?.map((field, c) => {
-                  return <td key={`cell-${r}-${c}`} className={border + " p-2"}>{row[field.name]}</td>
+                  return <td key={`cell-${r}-${c}`} className="border-b border-gray-300 p-2">{row[field.name]}</td>
                 })
               }
             </tr>

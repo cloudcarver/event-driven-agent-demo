@@ -6,7 +6,8 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker-dev": "pnpm install && pnpm run dev"
   },
   "dependencies": {
     "@ai-sdk/cohere": "^0.0.27",
@@ -19,6 +20,7 @@
     "nanoid": "^5.0.8",
     "next": "15.0.2",
     "node-fetch": "^3.3.2",
+    "node-postgres": "^0.6.2",
     "pg": "^8.13.1",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
@@ -28,8 +30,8 @@
   "devDependencies": {
     "@types/node": "^20",
     "@types/pg": "^8.11.10",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "eslint": "^8",
     "eslint-config-next": "15.0.2",
     "postcss": "^8",
