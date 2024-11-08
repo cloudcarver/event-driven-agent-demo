@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { GenerateTextResult } from "ai";
 import { runAndSleep } from "@/lib/utils";
 import { border } from "../const/styles";
+import { Provider } from "@/lib/models/types";
+import toast, { Toaster } from "react-hot-toast";
 
 interface PollResponse {
   event?: Event
@@ -13,12 +15,14 @@ interface Event {
   prompt: string
 }
 
-async function promptHandle({ message, prompt }: { prompt: string, message: string }): Promise<GenerateTextResult<any>> {
+async function promptHandle({ message, prompt, provider, modelName }: any): Promise<GenerateTextResult<any>> {
   let res = await fetch("/api/triggers/prompthandle", {
     method: "POST",
     body: JSON.stringify({
       messages: [{ role: "user", content: message }],
-      prompt
+      prompt,
+      provider,
+      modelName,
     }),
     headers: { "Content-Type": "application/json" }
   })
@@ -26,7 +30,12 @@ async function promptHandle({ message, prompt }: { prompt: string, message: stri
   return await res.json()
 }
 
-export default function EventHandler() {
+interface EventHandlerProps {
+  modelName: string
+  provider: Provider
+}
+
+export default function EventHandler(props: EventHandlerProps) {
 
   const pollRef = useRef<string | null>(null);
 
@@ -64,11 +73,13 @@ export default function EventHandler() {
     let res = await promptHandle({
       prompt: "You're a helpful assistant, you can handle user's request by calling the proper tools.",
       message: e.prompt,
+      provider: props.provider,
+      modelName: props.modelName,
     })
 
     res.toolCalls.forEach(async (tc) => {
       if (tc.toolName === "sendMessageToUser") {
-        alert(tc.args.message)
+        toast.success(tc.args.message)
       }
     })
 
@@ -99,9 +110,9 @@ export default function EventHandler() {
             <p className="mt-1 text-gray-700">{handlingPrompt}</p>
           </div>
           : <div className="flex items-center gap-2 text-gray-600">
-              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"/>
-              <span>Last poll: {lastRefreshAt?.toLocaleTimeString()}</span>
-            </div>
+            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+            <span>Last poll: {lastRefreshAt?.toLocaleTimeString()}</span>
+          </div>
       }
     </div>
   );

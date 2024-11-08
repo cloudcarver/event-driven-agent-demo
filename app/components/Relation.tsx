@@ -78,7 +78,7 @@ export default function Relation() {
     }, 1000)
   }, [relation, orderBy, limit])
 
-  return <div>
+  return <div className="text-sm">
     <div className="flex flex-row gap-2 items-center">
       <select className={border + " h-8 px-2 focus:ring-2 focus:ring-blue-200 focus:outline-none bg-white"} value={relation} onClick={() => refreshRelations()} onChange={(e) => setRelation(e.currentTarget.value)}>
         {
@@ -86,18 +86,21 @@ export default function Relation() {
             return <option key={idx} value={relation}>{relation}</option>
           })
         }
-      </select>        {relation && <>
+      </select>
+      {
+        relation && <>
           <span className="text-gray-600">OrderBy</span>
           <select className={border + " h-8 px-2 focus:ring-2 focus:ring-blue-200 focus:outline-none bg-white"} value={orderBy} onChange={(e) => {
-          setOrderBy(e.currentTarget.value)
-        }}>
-          {
-            info.fields?.map((field, idx) => {
-              return <option key={idx} value={field.name}>{field.name}</option>
-            })
-          }
-        </select>
-      </>}
+            setOrderBy(e.currentTarget.value)
+          }}>
+            {
+              info.fields?.map((field, idx) => {
+                return <option key={idx} value={field.name}>{field.name}</option>
+              })
+            }
+          </select>
+        </>
+      }
     </div>
     {
       info.error && <div className="text-red-500">{info.error}</div>
