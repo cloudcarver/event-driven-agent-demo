@@ -2,6 +2,7 @@
 
 This is the repo for the demo in *Towards Cognitive Agent: Beyond Q&A: Build Event-Driven Agents with Streaming Database*
 
+![img](assets/screenshot-preview.png)
 
 ## Quick Start
 
@@ -74,5 +75,5 @@ This is the repo for the demo in *Towards Cognitive Agent: Beyond Q&A: Build Eve
     ```
     🤔: Create table `login_events`, columns are nanoid, email, timestamp.
     🤔: Tell me when @example.com folks login.
-    🤔: Insert some data to login_events that will trigger the event listener.
+    🤔: Insert some sample data to login_events that will trigger the event listener.
     ```

@@ -226,7 +226,9 @@ export default function Page() {
                         const newRelations = new Map(relations);
                         newRelations.delete(id);
                         setRelations(newRelations);
-                      }}>{"×"}</button>
+                      }}>
+                        ×
+                      </button>
                     </div>
                     <Relation />
                   </div>
