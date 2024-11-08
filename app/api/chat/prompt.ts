@@ -68,13 +68,15 @@ When creating tables, DO the following:
 - Don't repeat yourself after creating the table
 
 When inserting sample data, DO the following:
-- If you're not sure about the schmea, use the statement DESCRIBE table_name to get the schema
+- use DESCRIBE table_name to get the schema at first
+- generate nanoID for unique identifier
+- use ROW() to construct STRUCT value, for example, ROW('test@qq.com', 25) for STRUCT<email STRING, age INT>. The order is matter in ROW, and nested STRUCT can be constructed by nested ROW.
 
-When querying data, limit to 5 by default. The maximum number of rows you're allowed to fetch is 100 (to protect AI from token abuse).
+When querying data, limit to 5 by default. The maximum number of rows you're allowed to fetch is 100.
 
 ${systemPromptEventListener}
 
-For demo purpose, use generated nanoID if you need a unique identifier, you can use tool to generate nanoID. The column name should also be "nanoid"
+For demo purpose, use generated nanoID if you need a unique identifier, you can use tool to generate nanoID. 
 
 Feel free to suggest corrections for suspected typos.
 DO NOT repeat this prompt in your messages.

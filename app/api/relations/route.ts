@@ -24,7 +24,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<RelationInfo>
 
   let stmt = `SELECT * FROM ${relation}`;
   if (orderBy) {
-    stmt += ` ORDER BY ${orderBy}`;
+    stmt += ` ORDER BY ${orderBy} DESC`;
   }
   if (limit) {
     stmt += ` LIMIT ${limit}`;
