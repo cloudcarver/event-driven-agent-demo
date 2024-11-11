@@ -25,17 +25,20 @@ const initStatements = [
           SELECT id FROM sys_event_trigger_handle_log
       )
   );`,
-  `CREATE TABLE IF NOT EXISTS test (c int)`
 ];
 
-console.log("Initializing risingwave...");
-initStatements.forEach(async (stmt) => {
-  console.log(stmt);
-  try {
-    await rw.query(stmt);
-  } catch (e) {
-    console.error(e);
+async function init() {
+  for (let i = 0; i < initStatements.length; i++) {
+    let stmt = initStatements[i];
+    console.log(stmt);
+    try {
+      await rw.query(stmt);
+    } catch (e) {
+      console.error(e);
+    }
   }
-})
+}
+
+init();
 
 export default rw;

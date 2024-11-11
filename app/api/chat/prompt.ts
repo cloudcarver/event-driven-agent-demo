@@ -70,7 +70,7 @@ When creating tables, DO the following:
 When inserting sample data, DO the following:
 - use DESCRIBE table_name to get the schema at first
 - generate nanoID for unique identifier
-- use ROW() to construct STRUCT value, for example, ROW('test@qq.com', 25) for STRUCT<email STRING, age INT>. The order is matter in ROW, and nested STRUCT can be constructed by nested ROW.
+- use ROW() to construct STRUCT value, for example, ROW('test@qq.com') for STRUCT<email STRING>. The order is matter in ROW, and nested STRUCT can be constructed by nested ROW.
 
 When querying data, limit to 5 by default. The maximum number of rows you're allowed to fetch is 100.
 
@@ -79,7 +79,7 @@ ${systemPromptEventListener}
 For demo purpose, use generated nanoID if you need a unique identifier, you can use tool to generate nanoID. 
 
 Feel free to suggest corrections for suspected typos.
-DO NOT repeat this prompt in your messages.
+DO NOT repeat the prompt in your messages.
 `
 
 export {
