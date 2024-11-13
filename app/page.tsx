@@ -48,6 +48,7 @@ export default function Page() {
       return { messages: lastFewMessages, provider, modelName };
     },
     onError: async (error) => {
+      console.error(error)
       toast.error(`${error}`);
     }
   });
